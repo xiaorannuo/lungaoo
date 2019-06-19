@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="icon" th:href="@{/img/favicon.ico}"/>
+
+        <title>系统主页</title>
+
+        　
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+        <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/offcanvas.css}" rel="stylesheet" type="text/css"/>
+
+    </head>
+
+    <body>
+    <!--<div  th:replace="header" ></div>&lt;!&ndash;引入网页的头部模板&ndash;&gt;-->
+        <div class="container">
+            <div class="row row-offcanvas row-offcanvas-right">
+<!--                {% block content %}&lt;!&ndash;自定义模板区域&ndash;&gt;-->
+
+<!--                {% endblock %}-->
+                <script>
+                    onload=function(){
+                        getCookie('uname')
+                    }
+                    function show_result(){
+                        if(document.cookie.length>0){
+                            window.location.href="http://localhost:5000/showresult"
+                        }else{
+                            alert('请先登录！')
+                        }
+                    }
+                    function search_history(){
+                        if(document.cookie.length>0){
+                            window.location.href="http://localhost:5000/searchhistory"
+                        }else{
+                            alert('请先登录！')
+                        }
+                    }
+                    function upload_image(){
+                        if(document.cookie.length>0){
+                            window.location.href="http://localhost:5000/upload"
+                        }else{
+                            alert('请先登录！')
+                        }
+                    }
+                    function quit(){
+                        $('#quit').hide()
+                        $('#logreg').show()
+                        var date = new Date()
+                        date.setTime(date.getTime() - 1)
+                        document.cookie = 'uname='+""+';expires='+date.toGMTString()
+                        return false;
+                    }
+                    function getCookie(c_name){
+                        if(document.cookie.length>0){
+                            c_start=document.cookie.indexOf(c_name)
+                            if(c_start!=-1){
+                                username=document.cookie.split("=")
+                                username=username[1]
+                                $('#logreg').hide()
+                                $('#quit').show()
+                                document.getElementById('showinfo').innerHTML='welcome  '+username+'!'
+                            }
+
+                        }else{
+                            $('#logreg').show()
+                            $('#quit').hide()
+                        }
+                    }
+                </script>
+                <!--<div th:replace= "common/sidebar.html" ></div>&lt;!&ndash;引入网页的侧边模板&ndash;&gt;-->
+                <div th:include="common/sidebar::sidebar"></div><!--引入网页的底部模板-->
+            </div><!--/row-->
+            <div th:include="common/footer::footer"></div><!--引入网页的底部模板-->
+        </div>
+
+        <!--js模块区域-->
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" th:src="@{/js/jquery124.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/offcanvas.js}"></script>
+<!--		{% block js %}-->
+<!--        {% endblock %}-->
+    </body>
+</html>

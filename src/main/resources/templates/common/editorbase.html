@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+        <title>{% block title %}结果页面{% endblock %}</title>
+
+
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+
+        <link href="{{ url_for('static', filename='css/offcanvas.css') }}" rel="stylesheet">
+        {% block css %}　
+        {% endblock %}
+    </head>
+
+    <body>
+        {% include "common/editorheader.html" %}
+        <div class="container">
+            <div class="row row-offcanvas row-offcanvas-right">
+                {% block content %}
+
+                {% endblock %}
+                {% include "common/editorsidebar.html" %}
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/offcanvas.js') }}"></script>
+        {% block js %}
+        {% endblock %}
+    </body>
+</html>

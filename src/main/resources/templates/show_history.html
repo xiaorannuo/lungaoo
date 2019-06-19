@@ -1,0 +1,40 @@
+{%extends "common/base.html"%}
+{%block formcontent%}
+    <table class="table table-striped table-hover" id="tab">
+        <thead>
+            <tr class="active">
+                <th class="theader">已上传文件</th>
+                <th class="theader">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+         {% for row in files %}
+                 <tr style="font-family: 'Times New Roman'">
+                     <td>{{ row }}</td>
+                     <td><a href="{{url_for('test',name='x')}}.replace('x',{{row}})">查询结果</a></td>
+                     <!--<td><input type="button" value="查询结果"></input></td>-->
+                 </tr>
+             {% endfor %}
+        </tbody>
+    </table>
+<br/><br/>
+<a href="index"><span class="glyphicon glyphicon-log-out">返回主页</span></a>
+<script>
+    $(function(){
+    $("#tab").on("click", ":button", function(event){
+        var file_name=$(this).closest("tr").find("td").eq(0).text()
+        var info={'file_name':file_name}
+        var senddata=Json.stringify(info)
+             $.ajax({
+                url: "test",
+                type: "POST",
+                data: senddata,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data)
+                }
+            })
+    });
+});
+</script>
+{%endblock%}

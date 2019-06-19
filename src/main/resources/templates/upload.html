@@ -1,0 +1,29 @@
+{% extends 'common/base.html' %}
+{% block formcontent %}
+<h1 style="margin:50px 0 0 0">上传您的文件</h1>
+<label class="control-label">Select File</label>
+<form method="post" role="form" enctype="multipart/form-data">
+    <input id="testfile" multiple type="file" class="file-loading" data-preview-file-type="text" data-theme="fas" name="media">
+</form>
+<br/><br/>
+<a href="index"><span class="glyphicon glyphicon-log-out">返回主页</span></a>
+<script>
+    $('#testfile').fileinput({
+    language: 'en',
+    uploadUrl:'http://localhost:5000/upload',
+    allowedFileExtensions:['mhd','zraw','raw'],
+    showCaption: true,
+    showUpload: true,
+    showRemove: true,
+    showClose: true,
+    browseClass: 'btn btn-primary'
+});
+    $("#testfile").on("fileuploaded", function (event, data, previewId, index) {
+        var response = data.response;
+        alert(response['msg']);
+    });
+    </script>
+{% endblock %}
+{% block title %}
+    上传文件
+{% endblock %}

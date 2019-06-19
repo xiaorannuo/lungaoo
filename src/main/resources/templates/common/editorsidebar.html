@@ -1,0 +1,46 @@
+<div class="col-xs-10 col-sm-4 sidebar-offcanvas" id="sidebar">
+    <p style="font-family: 'Times New Roman'">可疑病灶{{num}}个 该病例为{{kind}} 置信度为{{prob}}</p>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="active">
+                <th class="theader">ID</th>
+                <th class="theader">位置坐标</th>
+                <th class="theader">半径</th>
+            </tr>
+        </thead>
+        <tbody>
+         {% for row in result %}
+                 <tr style="font-family: 'Times New Roman'">
+                     <td><a href="javascript:void(0)" onclick="navigation(this.innerHTML)">{{ row[0] }}</a></td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                 </tr>
+             {% endfor %}
+        </tbody>
+    </table>
+    <!--<div class="list-group">-->
+        <!--<a href="#" class="list-group-item active">-->
+            <!--<label>可疑病灶{{num}}个</label>-->
+        <!--</a>-->
+        <!--<a href="#" class="list-group-item">-->
+            <!--<button type="button" class="btn btn-block btn-info" aria-label="Left Align">-->
+                <!--<span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>-->
+            <!--</button>-->
+        <!--</a>-->
+        <!--<a href="#" class="list-group-item">-->
+            <!--<button type="button" class="btn btn-primary" aria-label="Left Align">-->
+                <!--<span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>-->
+            <!--</button>-->
+        <!--</a>-->
+        <!--<a href="#" class="list-group-item">-->
+            <!--<button type="button" class="btn btn-success" aria-label="Left Align">-->
+                <!--<span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>-->
+            <!--</button>-->
+        <!--</a>-->
+        <!--<a href="#" class="list-group-item">-->
+            <!--<button type="button" class="btn btn-block btn-warning" aria-label="Left Align">-->
+                <!--<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>-->
+            <!--</button>-->
+        <!--</a>-->
+    <!--</div>-->
+</div>

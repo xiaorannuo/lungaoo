@@ -1,0 +1,126 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="icon" th:href="@{/img/favicon.ico}"/>
+
+  <title>系统主页</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+  <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/offcanvas.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+  <div th:include="common/header::header"></div><!--引入网页的底部模板-->
+    <div class="col-xs-12 col-sm-9">
+  <p class="pull-right visible-xs">
+    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+  </p>
+  <div class="jumbotron">
+    <h1>WelCome to Our System</h1>
+    <p>这是一款癌症检测识别系统，能够帮助您诊断疾病是您必备的健康助手</p>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-lg-4">
+      <h2>多点水</h2>
+      <p>冬天气候干燥，人体极易缺水，常喝白开水，不但能保证机体的需要，还可起到利尿排毒、消除废物之功效。
+      <br/>方法：每日饮水量应不少于2000-3000毫升<br/>&nbsp;</p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-xs-6 col-lg-4">
+      <h2>适当睡眠</h2>
+      <p>首先睡前半小时到1小时之间,不宜思考问题或看书,看过于紧张的电视,避免服用兴奋饮料（如咖啡,浓茶等),不吸烟等
+      <br/>方法：应作适当的体力活动（如散步）,做体操等适当放松，避免紧张的脑力活动。</p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-xs-6 col-lg-4">
+      <h2>多运动</h2>
+      <p>体育锻炼具有调节人体紧张情绪的作用，能改善生理和心理状态，恢复体力和精力。
+        运动是键康之本。生命在于运动，运动让我们生命活力力十足，心情舒畅，远离疾病，健康长寿<br/>&nbsp;</p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-xs-6 col-lg-4">
+      <h2>少熬夜</h2>
+      <p>经常熬夜的人，最容易引起的是内分泌失调，出现皮肤油腻，长痘，出现黑眼圈，体质下降等等。
+      不习惯熬夜的人，熬夜后整个人很疲惫、很虚弱，除了食补外，恢复睡眠习惯更重要。</p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-xs-6 col-lg-4">
+      <h2>合理饮食</h2>
+      <p>合理膳食是指一日三餐所提供的营养必须满足人体的生长、发育和各种生理、体力活动的需要。
+        合理饮食可以达到显著减肥的目的。并且对于调节新城代谢促进身体健康有着重要的意义。</p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-xs-6 col-lg-4">
+     <h2>保持好心情</h2>
+      <p>心存善念，宽容一些。试着用一颗平静的心，去接受那些让你恼火的事情。培养自信。
+        自信起来，展现人格魅力，对事业，生活和爱情都会有很大的帮助，自信让人快乐。</p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    </div>
+  </div>
+</div>
+    <div class="col-xs-12 col-sm-3" th:include="common/sidebar::sidebar"></div><!--引入网页的底部模板-->
+  <div class="col-xs-12 col-sm-12" th:include="common/footer::footer"></div><!--引入网页的底部模板-->
+
+</body>
+<script>
+  onload=function(){
+      getCookie('uname')
+  }
+  function show_result(){
+      if(document.cookie.length>0){
+          window.location.href="http://localhost:5000/showresult"
+      }else{
+          alert('请先登录！')
+      }
+  }
+  function search_history(){
+      if(document.cookie.length>0){
+          window.location.href="http://localhost:5000/searchhistory"
+      }else{
+          alert('请先登录！')
+      }
+  }
+  function upload_image(){
+      if(document.cookie.length>0){
+          window.location.href="http://localhost:5000/upload"
+      }else{
+          alert('请先登录！')
+      }
+  }
+  function quit(){
+      $('#quit').hide()
+      $('#logreg').show()
+      var date = new Date()
+      date.setTime(date.getTime() - 1)
+      document.cookie = 'uname='+""+';expires='+date.toGMTString()
+      return false;
+  }
+  function getCookie(c_name){
+      if(document.cookie.length>0){
+          c_start=document.cookie.indexOf(c_name)
+          if(c_start!=-1){
+              username=document.cookie.split("=")
+              username=username[1]
+              $('#logreg').hide()
+              $('#quit').show()
+              document.getElementById('showinfo').innerHTML='welcome  '+username+'!'
+          }
+
+      }else{
+          $('#logreg').show()
+          $('#quit').hide()
+      }
+  }
+</script>
+
+<script type="text/javascript" th:src="@{/js/jquery124.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/offcanvas.js}"></script>
+
+<style type="text/css">
+  p{
+    text-indent: 2em;
+  }
+</style>
+</html>

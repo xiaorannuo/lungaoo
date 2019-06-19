@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: dev
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/dbgirl
+#    username: root
+#    password: guanzhilin
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+
+      ##############################################
+      #配置Thymeleaf
+      #thymeleaf start
+  mvc:
+  static-path-pattern: /**
+ resources:
+  static-locations: classpath:/static/
+ thymeleaf:
+    content-type: text/html
+    mode: LEGACYHTML5
+  suffix: .html
+  cache: false #关闭缓存
+#    mode : LEGACYHTML5
+#    content-type: text/html
+#    mode: LEGACYHTML5

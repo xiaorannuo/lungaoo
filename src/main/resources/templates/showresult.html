@@ -1,0 +1,100 @@
+{%extends "common/editorbase.html"%}
+{%block css%}
+        <style>
+                .theader{
+                        font-family: "KaiTi";
+                        font-size: medium;
+                }
+                #page{
+                        font-family:"KaiTi";
+                        font-size:xx-large;
+                }
+        </style>
+{%endblock%}
+{% block content%}
+        <div class="col-xs-10 col-sm-8">
+                <canvas id="myCanvas" width="600" height="600" style="border: 1px solid"></canvas>
+                <p id="page"></p>
+        </div>
+        <script>
+            var x=3
+            var nums = eval('{{num}}')
+            var filename = '{{filename}}'
+            var flag=eval('{{flag}}')
+            var cur_id=0
+            var myImage
+            var ctx
+            var img
+            var cur_scale=1
+            if(flag==0){
+                document.write('<p>this file does not have any nodules it means you are healthy.<span id="sp"></span>s 后跳转</p>')
+                setInterval(go, 1000)
+            }else{
+                window.onload=function(){
+                    myImage=document.getElementById('myCanvas')
+                    ctx=myImage.getContext('2d')
+                    img=new Image()
+                    img.src="http://localhost:5000/static/result/result_" + filename +'_0.png'
+                    img.id="img"
+                    img.onload=function(){
+                        ctx.drawImage(img,myImage.width/2-img.width/2,myImage.height/2-img.height/2)
+                    }
+                    document.getElementById('page').innerHTML="第1张"
+                }
+            }
+            function navigation(id){
+                cur_id=id-1
+                img.src="http://localhost:5000/static/result/result_" + filename +'_'+String(cur_id)+'.png'
+                img.id="img"
+                ctx.drawImage(img,myImage.width/2-img.width/2,myImage.height/2-img.height/2)
+                document.getElementById('page').innerHTML="第"+String(cur_id+1)+"张"
+            }
+            function next(){
+                cur_id++
+                cur_id%=nums
+                img.src="http://localhost:5000/static/result/result_" + filename +'_'+String(cur_id)+'.png'
+                img.id="img"
+                ctx.drawImage(img,myImage.width/2-img.width/2,myImage.height/2-img.height/2)
+                document.getElementById('page').innerHTML="第"+String(cur_id+1)+"张"
+            }
+            function prev(){
+                if(cur_id==0){
+                    cur_id=num-1
+                }else {
+                    cur_id--
+                }
+                img.src="http://localhost:5000/static/result/result_" + filename +'_'+String(cur_id)+'.png'
+                img.id="img"
+                ctx.drawImage(img,myImage.width/2-img.width/2,myImage.height/2-img.height/2)
+                document.getElementById('page').innerHTML="第"+String(cur_id+1)+"张"
+            }
+            function upsample(){
+                scaleInput=1.1
+                cur_scale*=scaleInput
+                ctx.clearRect(0, 0, myImage.width, myImage.height);
+                ctx.save();
+                ctx.translate(myImage.width / 2 - img.width / 2 * cur_scale, myImage.height / 2 - img.height / 2 * cur_scale);
+                ctx.scale(cur_scale, cur_scale);
+                ctx.drawImage(img,0,0)
+                ctx.restore();
+            }
+            function downsample() {
+                scaleInput=0.9
+                cur_scale*=scaleInput
+                ctx.clearRect(0, 0, myImage.width, myImage.height);
+                ctx.save();
+                ctx.translate(myImage.width/2-img.width/2*cur_scale,myImage.height/2-img.height/2*cur_scale)
+                ctx.scale(cur_scale, cur_scale);
+                ctx.drawImage(img,0,0)
+                ctx.restore();
+            }
+            function go(){
+                x--;
+                    if(x>0){
+                    document.getElementById("sp").innerHTML=x;  //每次设置的x的值都不一样了。
+                    }else{
+                    location.href='http://localhost:5000/index';
+                    }
+            }
+        </script>
+{%endblock%}

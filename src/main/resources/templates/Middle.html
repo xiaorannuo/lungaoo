@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>跳转页面</title>
+</head>
+<body>
+<span id="sp"></span>
+<script type="text/javascript">
+    onload=function(){
+        setInterval(go,1000);
+    };
+    var x=3;
+    var flag=eval('{{flag}}')
+    if(flag==1){
+        word='用户名错误'
+    }else{
+        word='密码错误'
+    }
+    function go(){
+        x--;
+        if(x>0){
+            document.getElementById('sp').innerHTML=word+' 还有'+x+'s跳转';
+        }else{
+            location.href="http://localhost:5000/login";
+        }
+    }
+</script>
+</body>
+</html>
