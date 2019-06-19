@@ -42,6 +42,11 @@ public class Testcontroler {
         return "/register";
 
     }
+    @RequestMapping("/upload")
+    public String upload(){
+        return "/upload";
+
+    }
     private Cookie cookie;
     @PostMapping(value = "/login")
     public String girlAdd(Model model, HttpServletResponse response, @RequestParam("username") String username,

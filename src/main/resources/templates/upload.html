@@ -1,11 +1,42 @@
-{% extends 'common/base.html' %}
-{% block formcontent %}
+<!--{% extends 'common/base.html' %}-->
+<!--{% block formcontent %}-->
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />-->
+
+    <link rel="icon" th:href="@{/static/img/favicon.ico}"/>
+
+    <title>上传文件</title>
+    <!--    {% block css %}-->
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}"/>
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap-theme.min.css}"/>
+
+    <!-- 个性化主题文件 -->
+    <!-- font-awesome样式主题文体 -->
+    <link th:href="@{/css/font-awesome.css}" media="all" rel="stylesheet" type="text/css" />
+    <!-- fileinput样式主题文体 -->
+    <link th:href="@{css/fileinput.min.css}" media="all" rel="stylesheet" type="text/css" />
+    <!--    {% endblock %}-->
+
+    <!--    {% block js %}-->
+
+    <!--    {% endblock %}-->
+</head>
 <h1 style="margin:50px 0 0 0">上传您的文件</h1>
 <label class="control-label">Select File</label>
 <form method="post" role="form" enctype="multipart/form-data">
-    <input id="testfile" multiple type="file" class="file-loading" data-preview-file-type="text" data-theme="fas" name="media">
+    <input id="testfile"  type="file" class="file-loading" data-preview-file-type="text" data-theme="fas" name="media"/>
 </form>
-<br/><br/>
+<!--<br/><br/>-->
 <a href="index"><span class="glyphicon glyphicon-log-out">返回主页</span></a>
 <script>
     $('#testfile').fileinput({
@@ -23,7 +54,6 @@
         alert(response['msg']);
     });
     </script>
-{% endblock %}
-{% block title %}
-    上传文件
-{% endblock %}
+<!--{% endblock %}-->
+
+</html>
